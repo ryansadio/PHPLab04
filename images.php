@@ -15,13 +15,15 @@ foreach ($CurrentDirArray as $dir) {
     var_dump($dir);
 }
 
-function listFolderFiles($dir){
-    $ffs = scandir($dir);
+function listFolderFiles($dir)
+{
+    $folderFiles = scandir($dir);
     echo '<ol>';
-    foreach($ffs as $ff){
-        if($ff != '.' && $ff != '..'){
-            echo '<li>'.$ff;
-            if(is_dir($dir.'/'.$ff)) listFolderFiles($dir.'/'.$ff);
+    foreach ($folderFiles as $folderFile) {
+        if ($folderFile != '.' && $folderFile != '..') {
+            echo '<li>' . $folderFile;
+            if (is_dir($dir . '/' . $folderFile))
+                listFolderFiles($dir . '/' . $folderFile);
             echo '</li>';
         }
     }
@@ -29,3 +31,5 @@ function listFolderFiles($dir){
 }
 
 listFolderFiles($ImageDir);
+
+$imgFmt = "/^$/";
