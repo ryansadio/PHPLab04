@@ -5,39 +5,33 @@
  * Date: 29/09/2014
  * Time: 11:16 AM
  */
-$ImageDir = './images/';
-$CurrentDirArray = scandir($ImageDir);
-$dir = array();
 $ImageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tif", ".tiff"];
+$imageFiles[] = array();
 
-
-foreach ($CurrentDirArray as $dir) {
-    echo "\n<br>";
-    var_dump($dir);
-}
-
-function listFolderFiles($dir)
+function listFolderFiles($dir, &$imageFiles)
 {
-    $imageFiles = array();
     $folderFiles = scandir($dir);
     echo '<ol>';
     foreach ($folderFiles as $folderFile) {
         if ($folderFile != '.' && $folderFile != '..') {
             echo '<li>' . $folderFile;
-            $imageFiles[] = $folderFile;
-            if (is_dir($dir . '/' . $folderFile))
-                listFolderFiles($dir . '/' . $folderFile);
+            if (!is_dir($dir . '/' . $folderFile)) {
+                $imageFiles[] = $folderFile;
+            } else {
+                listFolderFiles($dir . '/' . $folderFile, $imageFiles);
+            }
             echo '</li>';
         }
     }
     echo '</ol>';
-
     return $imageFiles;
 }
 
-listFolderFiles($ImageDir);
+function FilterFileList($imageFiles)
+{
 
-function FilterFileList(listFolderFiles($ImageDir)) {
     var_dump($imageFiles);
 }
 
+$fileList = listFolderFiles('./images', $imageFiles);
+$filteredFileList = FilterFileList($imageFiles);
