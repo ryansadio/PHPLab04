@@ -5,7 +5,6 @@
  * Date: 29/09/2014
  * Time: 11:16 AM
  */
-$ImageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tif", ".tiff"];
 $imageFiles[] = array();
 
 function listFolderFiles($dir, &$imageFiles)
@@ -29,8 +28,14 @@ function listFolderFiles($dir, &$imageFiles)
 
 function FilterFileList($imageFiles)
 {
-
-    var_dump($imageFiles);
+    $targetFiles = array();
+    $imgExt = "/^.*\\.(jpg|jpeg|png|gif|bmp|tif|tiff)&/i";
+    foreach ($imageFiles as $imageFile) {
+        if(preg_match($imgExt, $imageFile)) {
+            $targetFiles[] = $imageFile;
+        }
+    }
+    var_dump($targetFiles);
 }
 
 $fileList = listFolderFiles('./images', $imageFiles);
