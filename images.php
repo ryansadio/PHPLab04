@@ -8,7 +8,8 @@
 $ImageDir = './images/';
 $CurrentDirArray = scandir($ImageDir);
 $dir = array();
-$files = array();
+$ImageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tif", ".tiff"];
+
 
 foreach ($CurrentDirArray as $dir) {
     echo "\n<br>";
@@ -17,19 +18,26 @@ foreach ($CurrentDirArray as $dir) {
 
 function listFolderFiles($dir)
 {
+    $imageFiles = array();
     $folderFiles = scandir($dir);
     echo '<ol>';
     foreach ($folderFiles as $folderFile) {
         if ($folderFile != '.' && $folderFile != '..') {
             echo '<li>' . $folderFile;
+            $imageFiles[] = $folderFile;
             if (is_dir($dir . '/' . $folderFile))
                 listFolderFiles($dir . '/' . $folderFile);
             echo '</li>';
         }
     }
     echo '</ol>';
+
+    return $imageFiles;
 }
 
 listFolderFiles($ImageDir);
 
-$imgFmt = "/^$/";
+function FilterFileList(listFolderFiles($ImageDir)) {
+    var_dump($imageFiles);
+}
+
