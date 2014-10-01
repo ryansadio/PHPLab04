@@ -43,6 +43,7 @@ function FilterFileList( $imageFiles )
     foreach ( $imageFiles as $imageFile ) {
         if( preg_match( $imgExt, $imageFile ) ) {
             $targetFiles[] = $imageFile;
+            echo ' <img src=" ' . $imageFile . ' " width="400"/><br />';
         }
     }
     var_dump( $targetFiles );
