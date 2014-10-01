@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="Local vagrant (awesome.dev)">
-    <option name="myAutoUpload" value="ALWAYS" />
+  <component name="PublishConfigData" serverName="Local vagrant (awesome.dev)">
+    <serverData>
+      <paths name="Local vagrant (awesome.dev)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/var/www/awesome" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="sandbox.exalth.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/public_html" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
   </component>
 </project>
 

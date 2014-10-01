@@ -5,7 +5,7 @@
  * Date: 29/09/2014
  * Time: 11:13 AM
  */
-$dir = './Images';
+$dir = './images';
 if (file_exists($dir)) {
     require_once 'images.php';
 }

@@ -7,36 +7,47 @@
  */
 $imageFiles[] = array();
 
-function listFolderFiles($dir, &$imageFiles)
+/**
+ * Returns all files (incl. path) contained within a directory
+ * and all it's subdirectory.
+ * A recursive function that calls itself when
+ * entering another folder.
+ * @param $dir directory to scan.
+ * @param $imageFiles Array containing paths of files
+ * @return array Array containing paths of files
+ */
+function listFolderFiles( $dir, &$imageFiles )
 {
-    $folderFiles = scandir($dir);
-    echo '<ol>';
-    foreach ($folderFiles as $folderFile) {
-        if ($folderFile != '.' && $folderFile != '..') {
-            echo '<li>' . $folderFile;
-            if (!is_dir($dir . '/' . $folderFile)) {
-                $imageFiles[] = $folderFile;
-            } else {
-                listFolderFiles($dir . '/' . $folderFile, $imageFiles);
-            }
-            echo '</li>';
+    $folderFiles = scandir( $dir );
+    foreach ( $folderFiles as $folderFile ) {
+        // Disregard current directory and 'up' directory
+        if ( $folderFile != '.' && $folderFile != '..' ) {
+            // Add  file path, name, and extension to the array
+            // excluding folders
+            if ( !is_dir( $dir . '/' . $folderFile ) )
+                $imageFiles[] = $dir . '/' . $folderFile;
+            else
+                listFolderFiles( $dir . '/' . $folderFile, $imageFiles );
         }
     }
-    echo '</ol>';
     return $imageFiles;
 }
 
-function FilterFileList($imageFiles)
+/**
+ * @param $imageFiles
+ */
+function FilterFileList( $imageFiles )
 {
     $targetFiles = array();
     $imgExt = "/^.*\\.(jpg|jpeg|png|gif|bmp|tif|tiff)&/i";
-    foreach ($imageFiles as $imageFile) {
-        if(preg_match($imgExt, $imageFile)) {
+    foreach ( $imageFiles as $imageFile ) {
+        if( preg_match( $imgExt, $imageFile ) ) {
             $targetFiles[] = $imageFile;
         }
     }
-    var_dump($targetFiles);
+    var_dump( $targetFiles );
+    var_dump( $imageFiles );
 }
 
-$fileList = listFolderFiles('./images', $imageFiles);
-$filteredFileList = FilterFileList($imageFiles);
+$fileList = listFolderFiles( 'images', $imageFiles );
+$filteredFileList = FilterFileList( $imageFiles );
