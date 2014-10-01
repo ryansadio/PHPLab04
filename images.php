@@ -39,14 +39,14 @@ function listFolderFiles( $dir, &$imageFiles )
 function FilterFileList( $imageFiles )
 {
     $targetFiles = array();
-    $imgExt = "/^.*\\.(jpg|jpeg|png|gif|bmp|tif|tiff)&/i";
+    $imgExt = "/.*\\.(jpg|jpeg|png|gif|bmp|tif|tiff)/i";
     foreach ( $imageFiles as $imageFile ) {
         if( preg_match( $imgExt, $imageFile ) ) {
             $targetFiles[] = $imageFile;
         }
     }
     var_dump( $targetFiles );
-    var_dump( $imageFiles );
+    //var_dump( $imageFiles );
 }
 
 $fileList = listFolderFiles( 'images', $imageFiles );
