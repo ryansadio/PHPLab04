@@ -16,12 +16,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     function appendToFile($path, $name, $text_Input)
     {
         $file = 'images.txt';
-        // Open the file to get existing content
-        $current = file_get_contents($file);
-        // Append a new record to the file
-        $current .= "$path\t$name\t$text_Input\n";
-        // Write the contents back to the file
-        file_put_contents($file, $current);
+        //Check if file exists or not
+        if(file_exists($file)) {
+            // Open the file to get existing content
+            $current = file_get_contents($file);
+            // Append a new record to the existing content
+            $current .= "$path\t$name\t$text_Input\n";
+            // Write the contents back to the file
+            file_put_contents($file, $current);
+        }
+        else {
+            file_put_contents($file, "");
+        }
+
     }
 
     appendToFile($path, $name, $humanInput);

@@ -91,5 +91,3 @@ if ( !empty($theUntagged) ) {
         <input type="submit" value="Save">
     </form>
 <?php } ?>
-
-//appendToFile(dirname($photo), basename($photo), $humanInput);

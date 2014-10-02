@@ -1,0 +1,13 @@
+images/animals	bird.jpg	Eagle
+images/animals	cat.jpg	
+images/animals	dog.jpg	
+images/animals	fish.jpg	
+images/animals	turtle.jpg	
+images/bcit	8432938547_46f86ec7e1_m.jpg	
+images/bcit	Albert_Einstein_Head.jpg	
+images/bcit	S10Pubnight-500x300.jpg	
+images/bcit	images.jpg	
+images/trips	76763076_XS.jpg	
+images/trips	8432938547_46f86ec7e1_m.jpg	
+images/trips	Albert_Einstein_Head.jpg	
+images/trips	Graduates_2012_cap_toss.jpg	
