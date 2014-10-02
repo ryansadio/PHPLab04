@@ -1,3 +1,10 @@
+<?php
+session_start();
+if( !( isset($_SESSION['TaggedImages'] ) || isset( $_SESSION['UntaggedImages'] ) ) ) {
+    $_SESSION['TaggedImages'] = array();
+    $_SESSION['UntaggedImages'] = array();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -21,12 +28,9 @@
 $dir = 'images';
 if (file_exists($dir)) {
     require_once 'images.php';
-}
-else {
+} else {
     echo "there are no images";
 }
-
-
 ?>
 </body>
 </html>

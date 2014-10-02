@@ -6,6 +6,7 @@
  * Time: 11:16 AM
  */
 $imageFiles[] = array();
+$textFileName = "images.txt";
 
 /**
  * Returns all files (incl. path) contained within a directory
@@ -48,9 +49,27 @@ function FilterFileList( $imageFiles )
 }
 
 $filteredFileList = FilterFileList( listFolderFiles( $dir, $imageFiles ) );
+$_SESSION['TaggedImages'] = $filteredFileList;
+WriteTaggedImagesToFile($textFileName);
 
 /* Show image and ask for input */
 foreach ($filteredFileList as $photo) {
     echo ' <img src=" ' . $photo . ' " width="400"/><br />';
-
 }
+
+function WriteTaggedImagesToFile($textFileName) {
+    $fp = fopen($textFileName, 'a+') or die("Cannot open file.");
+    fwrite($textFileName, $_SESSION['TaggedImages']);
+    fclose($fp);
+}
+
+/* TODO: come back later. This is to read from file.
+ * ReadTextFile($textFileName);
+
+function ReadTextFile( $textFileName ) {
+    $fp = fopen($textFileName, 'a+') or die("Cannot open file.");
+    //Create array to hold temporary tagged images and their path
+    $tempImagePaths = array();
+    $tempImageFiles = array();
+
+}*/
