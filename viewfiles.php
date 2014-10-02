@@ -1,3 +1,13 @@
+<?php
+session_start();
+if( !( isset($_SESSION['imageArray'] ) || isset( $_SESSION['peopleArray'] ) || isset( $_SESSION['index']) )) {
+    $_SESSION['imageArray'] = array();
+    $_SESSION['peopleArray'] = array();
+    $_SESSION['index'] = 0;
+    $_SESSION['scanned'] = false;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -8,49 +18,53 @@
 
 <?php
 
-function readMyTags ($path, $name, $text_Input)
-{
-    $file = 'images.txt';
-    // Open the file to get existing content
-    $current = file_get_contents($file);
-    // Append a new record to the file
-    $current .= "$path\t$name\t$text_Input\n";
-    // Write the contents back to the file
-    file_put_contents($file, $current);
-}
-
-function isInFile ($theUnknown)
-{
-    $file = 'images.txt';
-    if( strpos(file_get_contents($file),$theUnknown) !== false)
-        return true; // somewhere in the file
-    else return false;
-}
-
 function openMyTags () {
     $row = 1;
+    $photoPath = "";
+    $photoName = "";
+    $humanInputs = array();
+    $photoURLs = array();
     if (($handle = fopen( "images.txt", "r" )) !== FALSE) {
         while (($data = fgetcsv( $handle, 1000, "	" )) !== FALSE) {
             $num = count( $data );
-            echo "<p> $num fields in line $row: <br /></p>\n";
+            //echo "<p> $num fields in line $row: <br /></p>\n";
             $row++;
             for ($c = 0; $c < $num; $c++) {
-                echo $data[$c] . "<br />\n";
+                switch ($c) {
+                    case (0): $photoPath = $data[$c];
+                        break;
+                    case (1): $photoName = $data[$c];
+                        break;
+                    case (2): $humanInputs[] = $data[$c];
+                        break;
+                }
             }
+            $photoURLs[] = $photoPath . "/" . $photoName;
         }
         fclose($handle);
     }
+    $_SESSION['imageArray'] = $photoURLs;
+    $_SESSION['peopleArray'] = $humanInputs;
 }
 
-openMyTags();
+if ( !$_SESSION['scanned'] )
+{
+    openMyTags();
+    $_SESSION['scanned'] = true;
+} else {
+    if (sizeof($_SESSION['peopleArray']) - 2 >= $_SESSION['index'])
+        $_SESSION['index'] += 1;
+    else $_SESSION['index'] = 0;
+}
 
 ?>
 
-<div id="photo" class=""></div>
-<style>
-    #photo { background-image: url(<?php echo $photo;?>); }
-</style>
-<button id="next" class="">Next</button>
+<img src=" <?php echo $_SESSION['imageArray'][$_SESSION['index']]; ?> " width="400"/><br />
+<h3><?php echo $_SESSION['peopleArray'][$_SESSION['index']]; ?></h3>
+
+<form class="" id="" action="viewfiles.php" method="post">
+    <input type="submit" value="Next">
+</form>
 
 </body>
 </html>
