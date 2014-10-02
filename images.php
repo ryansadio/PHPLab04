@@ -12,7 +12,6 @@ $imageFiles[] = array();
  * and all it's subdirectory.
  * A recursive function that calls itself when
  * entering another folder.
- * @param $dir directory to scan.
  * @param $imageFiles Array containing paths of files
  * @return array Array containing paths of files
  */
@@ -41,13 +40,12 @@ function FilterFileList( $imageFiles )
     $targetFiles = array();
     $imgExt = "/.*\\.(jpg|jpeg|png|gif|bmp|tif|tiff)/i";
     foreach ( $imageFiles as $imageFile ) {
-        if( preg_match( $imgExt, $imageFile ) ) {
+        if( !is_array( $imageFile ) && preg_match( $imgExt, $imageFile ) ) {
             $targetFiles[] = $imageFile;
             echo ' <img src=" ' . $imageFile . ' " width="400"/><br />';
         }
     }
-    var_dump( $targetFiles );
-    //var_dump( $imageFiles );
+/*    var_dump( $targetFiles );*/
 }
 
 $fileList = listFolderFiles( 'images', $imageFiles );
