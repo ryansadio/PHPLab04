@@ -1,7 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Lab04 - View Images</title>
+</head>
+<body>
+
 <?php
-/**
- * Created by PhpStorm.
- * User: Edwin, Ryan
- * Date: 29/09/2014
- * Time: 11:17 AM
- */ 
+
+    
+
+?>
+
+<div id="photo" class=""></div>
+<style>
+    #photo { background-image: url(<?php echo $photo;?>); }
+</style>
+<button id="next" class="">Next</button>
+
+</body>
+</html>

@@ -5,32 +5,46 @@ if( !( isset($_SESSION['TaggedImages'] ) || isset( $_SESSION['UntaggedImages'] )
     $_SESSION['UntaggedImages'] = array();
 }
 ?>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    $humanInput = $_POST["humanInput"];
+    $path = $_POST["path"];
+    $NAME = $_POST["name"];
+
+    function appendToFile($path, $name, $text_Input)
+    {
+        $file = 'images.txt';
+        // Open the file to get existing content
+        $current = file_get_contents($file);
+        // Append a new record to the file
+        $current .= "$path\t$name\t$text_Input\n";
+        // Write the contents back to the file
+        file_put_contents($file, $current);
+    }
+
+    appendToFile(dirname($photo), basename($photo), $humanInput);
+
+    header("Location: index.php");
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>PHP - Lab04</title>
+    <title>Lab04 - Tag Images</title>
 </head>
 <body>
 
-<div id="photo" class="">Hello</div>
-<style>
-    #photo { background-image: url(<?php echo $photo;?>); }
-</style>
-
 <?php
-/**
- * Created by PhpStorm.
- * User: Edwin, Ryan
- * Date: 29/09/2014
- * Time: 11:13 AM
- */
+$photo = "images/animals/bird.jpg";
 $dir = 'images';
-if (file_exists($dir)) {
-    require_once 'images.php';
-} else {
-    echo "there are no images";
-}
+if (file_exists($dir)) require_once 'images.php';
+else echo "there are no images";
 ?>
 </body>
 </html>
