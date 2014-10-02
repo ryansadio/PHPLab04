@@ -4,7 +4,19 @@ if( !( isset($_SESSION['imageArray'] ) || isset( $_SESSION['peopleArray'] ) || i
     $_SESSION['imageArray'] = array();
     $_SESSION['peopleArray'] = array();
     $_SESSION['index'] = 0;
-    $_SESSION['scanned'] = false;
+}
+?>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    openMyTags();
+    if (sizeof($_SESSION['peopleArray']) - 2 >= $_SESSION['index'])
+        $_SESSION['index'] += 1;
+    else $_SESSION['index'] = 0;
+
+    header("Location: viewfiles.php");
+    exit;
 }
 ?>
 
@@ -45,16 +57,6 @@ function openMyTags () {
     }
     $_SESSION['imageArray'] = $photoURLs;
     $_SESSION['peopleArray'] = $humanInputs;
-}
-
-if ( !$_SESSION['scanned'] )
-{
-    openMyTags();
-    $_SESSION['scanned'] = true;
-} else {
-    if (sizeof($_SESSION['peopleArray']) - 2 >= $_SESSION['index'])
-        $_SESSION['index'] += 1;
-    else $_SESSION['index'] = 0;
 }
 
 ?>
