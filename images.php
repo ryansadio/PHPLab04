@@ -85,32 +85,11 @@ if ( !empty($theUntagged) ) {
     ?>
 
     <form class="" id="" action="index.php" method="post">
-        <input type="text" name="path" value="/">
-        <input type="hidden" name="name" value="<?php echo "$name"; ?>">
-        <input type="text" id="humanInput" name="humanInput" aria-label="people" placeholder="people" width="700px">
+        <input type="hidden" id="photoPath" name="photoPath" aria-label="photoPath" value="<?php echo "$path"; ?>">
+        <input type="hidden" id="photoName" name="photoName" aria-label="photoName" value="<?php echo "$name"; ?>">
+        <input type="text" id="humanInput" name="humanInput" aria-label="people" placeholder="people">
         <input type="submit" value="Save">
     </form>
+<?php } ?>
 
-
-<!--/* Show image and ask for input */
-foreach ($_SESSION['UntaggedImages'] as $photo) {
-    // Check if image is already in text file
-    $alreadyThere = false; // TODO: Check here
-    $humanInput = "Placeholder"; // TODO: Input field here
-    // if there already skip
-    if ($alreadyThere) {
-        // skip to next image
-        echo ' <img src=" ' . $photo . ' " width="400"/><br />';
-        // else wait for human to click next and call appendToFile
-    } else
-    {
-        echo ' <img src=" ' . $photo . ' " width="400"/><br />';
-        ?>
-
-    <form class="" id="" action="index.php" method="post">
-        <input type="text" id="humanInput" name="humanInput" aria-label="people" placeholder="people" width="700px">
-        <input type="submit" value="Save">
-    </form>-->
-<?php
-}   //appendToFile(dirname($photo), basename($photo), $humanInput);
-?>
+//appendToFile(dirname($photo), basename($photo), $humanInput);

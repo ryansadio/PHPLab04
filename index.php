@@ -10,8 +10,8 @@ if( !( isset($_SESSION['TaggedImages'] ) || isset( $_SESSION['UntaggedImages'] )
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $humanInput = $_POST["humanInput"];
-    $path = $_POST["path"];
-    $NAME = $_POST["name"];
+    $path = $_POST["photoPath"];
+    $name = $_POST["photoName"];
 
     function appendToFile($path, $name, $text_Input)
     {
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         file_put_contents($file, $current);
     }
 
-    appendToFile(dirname($photo), basename($photo), $humanInput);
+    appendToFile($path, $name, $humanInput);
 
     header("Location: index.php");
     exit;
