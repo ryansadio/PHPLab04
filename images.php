@@ -72,6 +72,7 @@ $filteredFileList = FilterFileList( listFolderFiles( $dir, $imageFiles ) );
 $theUntagged = array();
 // For each item not in the file, add to theUntagged
 foreach ($filteredFileList as $theUnknown) {
+    /*if ( basename($theUnknown)) ) { // only basenames */
     if ( !isInFile(dirname($theUnknown) . "\t" . basename($theUnknown)) ) {
         $theUntagged[] = $theUnknown; // Add to theUntagged
     }
@@ -87,7 +88,9 @@ if ( !empty($theUntagged) ) {
     <form class="" id="" action="index.php" method="post">
         <input type="hidden" id="photoPath" name="photoPath" aria-label="photoPath" value="<?php echo "$path"; ?>">
         <input type="hidden" id="photoName" name="photoName" aria-label="photoName" value="<?php echo "$name"; ?>">
-        <input type="text" id="humanInput" name="humanInput" aria-label="people" placeholder="people">
+        <input type="text" id="humanInput" name="humanInput" aria-label="people" placeholder="people" autofocus="true">
         <input type="submit" value="Save">
     </form>
 <?php } ?>
+
+<!--appendToFile(dirname($photo), basename($photo), $humanInput);-->
